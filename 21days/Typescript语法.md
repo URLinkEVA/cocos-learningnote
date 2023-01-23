@@ -76,3 +76,78 @@ let state:State = State.run;
 
 
 
+# 条件控制语句
+
+跟c++一样
+
+三目运算符
+
+`num = num > 100 ? 100 : num;`
+
+# 循环控制语句
+
+```typescript
+let nums:string[] = ["1", "2", "3"]
+for(let i = 0; i < 3; i++)
+{
+	documnet.write(nums[i]);
+}
+```
+
+ # 函数
+
+流水线
+
+```typescript
+function func(char: string)
+{
+    let arr: string[] = ['a', 'b', 'c'];
+    for(let i = 0; i < n; i++){
+        if(char == arr[i]){
+            document.write("当前是第" + i + "个字符");
+        }
+    }
+}
+
+func('a');
+
+function add(num1:number, num2:number): number {
+    let num = num1 + num2;
+    return num;
+}
+
+let test = add(3, 4);
+```
+
+# 面向对象
+
+
+
+# 构造与静态
+
+# 继承与抽象类
+
+# 接口与属性拓展
+
+# 名称空间
+
+# 泛型
+
+# 元组数组字典
+
+# 回调
+
+# 正则表达式
+
+# 访问修饰符
+
+# 单例模式
+
+# 代理模式
+
+# 观察者模式
+
+# 工厂模式
+
+# 链表
+
