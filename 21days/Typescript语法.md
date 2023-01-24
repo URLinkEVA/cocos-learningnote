@@ -121,6 +121,31 @@ let test = add(3, 4);
 
 # 面向对象
 
+类和对象，类是抽象，对象是实体
+
+```typescript
+// 类：人   对象：venti zhongli
+class Person{
+    name: string = "默认";
+    age: number = 0;
+    
+    say(){
+        document.write(this.name);
+    }
+}
+
+// 实例化对象
+let a = new Person();
+a.name = "venti";
+a.age = 1000;
+a.say();
+
+let b = new Person();
+b.name = "zhongli";
+b.age = 5000;
+b.say();
+```
+
 
 
 # 构造与静态
