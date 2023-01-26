@@ -150,9 +150,152 @@ b.say();
 
 # 构造与静态
 
+成员属性，成员方法
+
+静态属性，静态方法
+
+```typescript
+class Person{
+    static des: string = "这是一个Person类";
+    static test(){
+        
+    }
+    name: string = "默认";
+    age: number = 0;
+	// 构造方法
+	constructor(name: string, age: number){
+    	this.name = name;
+	}
+    
+    say(){
+        document.write(this.name);
+    }
+}
+
+// 调用des
+Person.des = "a";
+Person.test();
+
+let a = new Person("venti", 1000);
+a.say();
+```
+
+
+
 # 继承与抽象类
 
+单继承
+
+```typescript
+// 继承
+class Person{
+    name: string = "";
+    // age: number = 1000;
+
+    say(){
+        document.write("叫" + this.name);
+    }
+}
+
+class Student extends Person{
+    num: number = 0;
+    score: number = 0;
+
+    say(){
+        super.say(); // 父类
+        document.write("学生叫" + this.name);
+    }
+}
+
+let a = new Student();
+a.name = "venti";
+a.say();
+```
+
+```typescript
+// 抽象类 本省不能被实例化为对象，可以被继承
+abstract class Person{
+    name: string = "";
+    run(){
+
+    }
+
+    abstract say();
+}
+
+class Student extends Person{
+    say(){
+
+    }
+}
+
+let a :Person = new Student();
+a.say();
+a.run();
+```
+
+
+
 # 接口与属性拓展
+
+接口是一系列抽象方法的声明，是一些方法特征的集合，这些方法都应该是抽象的，需要由具体的类去实现，然后第三方就可以通过这组抽象方法调用，让具体的类执行具体的方法。
+
+接口就是实现一个多继承，也算是一个协议。继承更倾向于继承父类的特性，接口更像需要实现的特定行为，如果是特性就用继承，如果是行为就用接口。
+
+```typescript
+// 狼人
+class Person{
+	name: string;    
+}
+
+interface IWolf{
+    attack();
+}
+
+interface IDog{
+    eat();
+}
+
+class Wolfman extends Person implements IWolf, IDog{
+    attack(){
+
+    }
+
+    eat(){
+        
+    }
+}
+```
+
+```typescript
+// 属性寄存器
+class Person{
+    _hp: number = 100;
+
+    // 取值
+    get hp(){
+        return this._hp;
+    }
+
+    // 赋值
+    set hp(value){
+        if(value < 0){
+            this._hp = 0;
+        }else{
+            this._hp = value;
+        }
+    }
+
+}
+
+let a = new Person();
+a.hp -= 20;
+console.log(a.hp + "");
+```
+
+或者直接sethp()写个方法，不用get、set
+
+
 
 # 名称空间
 
