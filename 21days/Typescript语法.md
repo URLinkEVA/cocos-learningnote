@@ -299,11 +299,106 @@ console.log(a.hp + "");
 
 # 名称空间
 
+合并，解决重名问题
+
+```typescript
+namespace aa{
+    export class Person{
+        name: string;
+    }
+}
+
+namespace bb{
+    export class Person{
+        // ...
+    }
+}
+
+let person = new aa.Person();
+let person2 = new bb.Person();
+```
+
+
+
 # 泛型
+
+```typescript
+function add(num: any): any{
+    if(typeof num == "number"){
+        num++;
+        return num;
+    }else return num;
+}
+
+console.log(add("3") + "");
+```
+
+```typescript
+function add<T>(num: T): T{
+    if(typeof num == "number"){
+        num++;
+        return num;
+    }else return num;
+}
+
+console.log(add<number>(3) + "");
+```
+
+限制类型相同
 
 # 元组数组字典
 
+```typescript
+let mytuple = ["kongla", 10];
+
+console.log(mytuple[0]);
+console.log(mytuple[1]);
+mytuple.push("tmp");
+console.log(mytuple[2]);
+
+[LOG]: "kongla"
+[LOG]: 10 
+[LOG]: "tmp"
+```
+
+```typescript
+// array.length 数组长度
+let arr1: number[] = [1,2,3];
+let arr2: Array<number> = new Array<number>();
+// 数组后加元素
+arr1.push(4);
+// 数组前加元素
+arr1.unshift(0);
+// 删除最后元素
+arr1.pop();
+// 删除前面元素
+arr1.shift();
+// 从第几位开始删除几个
+arr1.splice(0,1);
+// 合并两个数组
+arr1 = arr1.concat(arr2);
+// 查找数组位置
+let index = arr1.indexOf(3);
+// 排序
+arr1.sort();
+arr1.reverse();
+```
+
+```typescript
+// 字典
+let dic: {[key: string]: string}  = {
+    "name1": "kongkla",
+    "name2": "kiro"
+};
+
+dic["name3"] = "appendix";
+console.log(dic["name3"]);
+
+```
+
 # 回调
+
+
 
 # 正则表达式
 
