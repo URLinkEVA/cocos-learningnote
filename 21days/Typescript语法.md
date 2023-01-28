@@ -396,7 +396,38 @@ console.log(dic["name3"]);
 
 ```
 
+
+
 # 回调
+
+函数传参
+
+```typescript
+function func1(value: Function){
+    // ...
+    value();
+}
+
+
+func();function func(value: Function){
+    // ...
+    value("nana");
+}
+
+function test(name: string){
+    console.log("test");
+}
+
+func(test);
+
+func(function(name: string){
+    console.log("test2");
+});
+
+func((name: string) => {
+    console.log("test3");
+})
+```
 
 
 
@@ -414,3 +445,32 @@ console.log(dic["name3"]);
 
 # 链表
 
+一般用数组就行
+
+```typescript
+class Person{
+    name: string;
+    next: Person;
+
+    constructor(name){
+        this.name = name;
+    }
+}
+
+let person = new Person("ano1");
+person.next = new Person("ano2");
+person.next.next = new Person("ano3");
+
+// 删除
+person.next = person.next.next;
+// 添加
+let tmpperson = new Person("ano4");
+tmpperson.next = person.next;
+person.next = tmpperson;
+
+while(person){
+    console.log(person.name);
+    // 节点后移
+    person = person.next;
+}
+```
