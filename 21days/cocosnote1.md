@@ -52,11 +52,80 @@ ab点乘等于模乘cos角
 
 # 脚本解析
 
+新建ts脚本，挂载到精灵上，双击ts在vscode中打开，下面是自动生成的代码
 
+```typescript
+const {ccclass, property} = cc._decorator;
+
+@ccclass
+export default class NewClass extends cc.Component {
+
+    @property(cc.Label)
+    label: cc.Label = null;
+
+    @property
+    text: string = 'hello';
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {}
+
+    start () {
+
+    }
+
+    // update (dt) {}
+}
+```
+
+ ccclass和property两个装饰器
+
+Newclass改为新建ts同名例如Test
+
+export default 允许类的调用
+
+@property 面板显示可以去修改
 
 # 脚本生命周期
 
+```typescript
+// LIFE-CYCLE CALLBACKS:
+// 初始化调用
+onLoad () {
+    console.debug("onload");
+}
+
+onEnable(){
+    
+}// 会多次执行
+
+// 初始化调用 
+start () {
+	console.debug("start");
+}
+// 每帧调用
+update (dt) {
+    
+}
+
+lateUpdate(){
+    
+}
+
+onDisable(){
+    
+}
+// 销毁时调用
+onDestroy(){
+    console.debug("ondestory");
+}
+```
+
+这些函数是会自己调用的，只需要在里面写东西
+
 # 节点常用属性方法
+
+
 
 # 预设体的使用
 
@@ -69,3 +138,4 @@ ab点乘等于模乘cos角
 # 触摸与自定义事件
 
 # 碰撞检测
+
