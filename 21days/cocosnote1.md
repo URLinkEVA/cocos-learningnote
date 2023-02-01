@@ -96,7 +96,7 @@ onLoad () {
 }
 
 onEnable(){
-    
+    console.debug("onenable");
 }// 会多次执行
 
 // 初始化调用 
@@ -113,7 +113,7 @@ lateUpdate(){
 }
 
 onDisable(){
-    
+    console.debug("ondisable");
 }
 // 销毁时调用
 onDestroy(){
@@ -125,9 +125,78 @@ onDestroy(){
 
 # 节点常用属性方法
 
+```typescript
+const {ccclass, property} = cc._decorator;
 
+@ccclass
+export default class Test extends cc.Component {
+
+    @property(cc.Label)
+    label: cc.Label = null;
+
+    @property
+    text: string = 'hello';
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // 初始化调用
+    start () {
+        // 查找子节点方式
+        // this.node.children[0];
+        // this.node.getChildByName("abc");
+        // cc.find("Canvas/Main Camera");
+
+        // 获得父节点方式
+        // this.node.getParent();
+        // this.node.setParent(ddd);
+
+        // 移除所有子节点
+        // this.node.removeAllChildren();
+
+        // 移除某个子节点
+        // this.node.removeChild(ddd);
+
+        // 从父结点中移除
+        // this.node.removeFromParent();
+
+        // 访问位置
+        // this.node.x
+        // this.node.y
+        // this.node.setPosition(3,4);
+        // this.node.setPosition(cc.v2(3,4));
+
+        // 旋转
+        // this.node.rotation
+        // 缩放
+        // this.node.scale
+        // 锚点
+        // this.node.color = cc.Color.RED;
+
+        // 节点开关
+        // this.node.active = false;
+
+        // 组件开关
+        // this.enabled = false;
+
+        // 获取组件
+        // let sprite = this.getComponent(cc.Sprite);
+        // sprite.enabled
+        // this.getComponentInChildren(cc.Sprite);
+
+        // 获取失败都是null
+
+    }
+
+    // 每帧调用
+    update (dt) {
+        
+    }
+}
+```
 
 # 预设体的使用
+
+
 
 # 资源动态加载
 
