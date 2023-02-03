@@ -196,9 +196,56 @@ export default class Test extends cc.Component {
 
 # 预设体的使用
 
+创建地面使用相同脚本 
 
+预设体相当于一个存档
+
+ ```typescript
+start () {
+    // 创建节点
+    let node = new cc.Node("new");
+    // 添加组件
+    node.addComponent(cc.Sprite);
+}
+ ```
+
+```typescript
+const {ccclass, property} = cc._decorator;
+
+@ccclass
+export default class Test extends cc.Component {
+
+    @property(cc.Label)
+    label: cc.Label = null;
+
+    @property
+    text: string = 'hello';
+
+    // 预设体
+    @property(cc.Prefab)
+    pre: cc.Prefab = null;
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // 初始化调用
+    start () {
+        // 实例化预设体
+        let node = cc.instantiate(this.pre);
+        // 设置父节点
+        node.setParent(this.node);
+        node.setPosition(0,0,0);
+    }
+
+    // 每帧调用
+    update (dt) {
+        
+    }
+}
+```
 
 # 资源动态加载
+
+
 
 # 场景管理
 
