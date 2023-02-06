@@ -1,3 +1,5 @@
+
+
 # cocoscreator环境
 
 配vscode以及cocos3.7.0版本
@@ -245,11 +247,56 @@ export default class Test extends cc.Component {
 
 # 资源动态加载
 
+```typescript
+    start () {
+        let self = this;
+        // http://website.com/11.png
+        cc.loader.loadRes("Test/11", cc.SpriteFrame ,function(err, sp){
+            self.getComponent(cc.Sprite).spriteFrame = sp;
+        });
+        // ```
+    }
+```
 
+```typescript
+cc.loader.loadResDir("Test/lumine1", cc.SpriteAtlas, function(err, atlas: cc.SpriteAtlas){
+    self.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame("head");
+});
+```
+
+动态加载精灵图中的某一部分
 
 # 场景管理
 
+新建场景并保存
+
+第一个场景挂了个Test脚本
+
+进度条就是等加载场景
+
+```typescript
+start () {
+   // 加载第二个场景
+   // cc.director.loadScene("game2", function(){
+   //     // 当前已加载到新的场景里了
+// });
+
+   // 预加载
+   cc.director.preloadScene("game2", function(){
+       // 场景加载到内存了，还没有切换
+       cc.director.loadScene("game2");
+   });
+}
+```
+
+```typescript
+cc.game.addPersistRootNode(this.node); // 常驻节点
+cc.game.removePersistRootNode(this.node);
+```
+
 # 键鼠事件
+
+
 
 # 触摸与自定义事件
 
