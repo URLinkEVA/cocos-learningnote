@@ -296,7 +296,49 @@ cc.game.removePersistRootNode(this.node);
 
 # 键鼠事件
 
+```typescript
+start () {
+    this.node.on(cc.Node.EventType.MOUSE_DOWN, function(event){
+        console.debug("鼠标已按下" + event.getLocation());
+    });
+}
+```
 
+鼠标事件监听，getLocation方法是获取点击坐标
+
+mouse_down,enter,move,leave,up,wheel
+
+```typescript
+start () {
+    this.node.on(cc.Node.EventType.MOUSE_DOWN, function(event){
+        if(event.getButton() == cc.Event.EventMouse.BUTTON_LEFT){
+            console.debug("左键" + event.getLocation());
+        }
+        if(event.getButton() == cc.Event.EventMouse.BUTTON_RIGHT){
+            console.debug("右键" + event.getLocation());
+        }
+    });
+}
+```
+
+监听鼠标左右键
+
+```typescript
+this.node.off(cc.Node.EventType.MOUSE_DOWN); // 停止监听
+```
+
+一般写在onDestroy()中
+
+键盘监听
+
+```typescript
+cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
+      if(event.keyCode == cc.macro.KEY.w)
+            console.debug("按下w键");
+});
+```
+
+如果键多的话用switch
 
 # 触摸与自定义事件
 
