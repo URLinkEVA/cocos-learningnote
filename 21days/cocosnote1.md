@@ -1,5 +1,3 @@
-
-
 # cocoscreator环境
 
 配vscode以及cocos3.7.0版本
@@ -342,5 +340,90 @@ cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
 
 # 触摸与自定义事件
 
+```typescript
+start () {
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
+        if(event.keyCode == cc.macro.KEY.w)
+            console.debug("按下w键");
+        if(event.keyCode == cc.macro.KEY.a)
+            console.debug("按下a键");
+        if(event.keyCode == cc.macro.KEY.s)
+            console.debug("按下s键");
+        if(event.keyCode == cc.macro.KEY.d)
+            console.debug("按下d键");
+        if(event.keyCode == cc.macro.KEY.j)
+            console.debug("按下j键");
+        if(event.keyCode == cc.macro.KEY.k)
+            console.debug("按下k键");    
+    });
+
+    // 触摸事件
+    this.node.on(cc.Node.EventType.TOUCH_START, function(event){
+        console.debug("已触摸" + event.getLocation());
+    });
+}
+```
+
+```typescript
+    // 触摸事件
+    let self = this;
+    this.node.on(cc.Node.EventType.TOUCH_START, function(event){
+        // console.debug("已触摸" + event.getLocation());
+        // self.node.emit("myevent1");
+        self.node.dispatchEvent(new cc.Event.EventCustom("myevent1", true));
+    });
+
+    // 监听自定义事件
+    this.node.on("myevent1", function(){
+        console.debug("这是自定义事件1");
+```
+
+冒泡传递，事件一个向上传一个，传递完才会开始逐级处理
+
+大游戏建议自己写一套消息框架，那两个都不是很好用
+
 # 碰撞检测
 
+添加碰撞组件，offset偏移，size大小都不怎么改
+
+other是别人，self是自己
+
+记得开碰撞检测
+
+```typescript
+const {ccclass, property} = cc._decorator;
+
+@ccclass
+export default class NewClass extends cc.Component {
+
+    @property(cc.Label)
+    label: cc.Label = null;
+
+    @property
+    text: string = 'hello';
+
+    // LIFE-CYCLE CALLBACKS:pen
+
+    // onLoad () {}
+
+    start () {
+        // 碰撞检测
+        cc.director.getCollisionManager().enabled = true;
+    }
+
+    // 产生碰撞会调用一次
+    onCollisionEnter(other){
+        console.debug("碰撞产生" + other.tag);
+    }
+
+    onCollisionStay(other){
+        console.debug("碰撞持续");
+    }
+
+    onCollisionExit(other){
+        console.debug("碰撞结束");
+    }
+
+    // update (dt) {}
+}
+```
