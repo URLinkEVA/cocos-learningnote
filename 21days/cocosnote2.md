@@ -57,15 +57,101 @@ start () {
 
 # 物理系统
 
+组件rigidbody受到重力影响
 
+在onLoad里添加代码
+
+```typescript
+cc.director.getPhysicsManager().enabled = true;
+```
+
+高速移动物体勾选bullet
+
+Type里的dynamic受速度重力影响
 
 # 物理碰撞
 
+给物体一个力
+
+物理组件中的碰撞模型
+
+```typescript
+let rbody = this.getComponent(cc.RigidBody);
+// 在中心点给一个1000的力，立即生效
+rbody.applyForce(cc.v2(1000,0),cc.v2(0,0),true);
+
+rbody.applyForceToCenter(cc.v2(5000,0), true);
+```
+
+```typescript
+// 速度
+rbody.linearVelocity = cc.v2(50,0);
+```
+
+```typescript
+// 开始碰撞
+onBeginContact(contact, self, other){
+     // 得到碰撞点
+     let points = contact.getWorldManifold().points;
+     // 法线
+     let normal = contact.getWorldManifold().normal;
+     console.debug("碰撞检测" + points[0]);
+};
+
+// 结束碰撞
+onEndContact(contact, self, other){
+     console.debug("结束碰撞");        
+};
+```
+
 # 射线
+
+sensor传感器
+
+可以穿过的碰撞体 
+
+```typescript
+onLoad () {
+    cc.director.getPhysicsManager().enabled = true;
+
+    // 打出一条射线
+    let results = cc.director.getPhysicsManager().rayCast(this.node.getPosition(), cc.v2(this.node.x, this.node.y+100), cc.RayCastType.Closest);
+    for(let i = 1; i < results.length; i++){
+        let res = results[i]; 
+        // 射线碰到的碰撞器
+        res.collider
+        // 碰到的点
+        res.point
+        // 碰到的法线
+        res.normal
+    }       
+}
+```
 
 # 射线小练习
 
+```typescript
+// 方向
+dir: cc.Vec2 = cc.v2(0,1); // 左x右y
+
+onLoad(){
+    // 开物理检测
+	cc.director.getPhysicsManager().enabled = true;
+}
+
+update(dt){
+    // 更新移动
+    this.node.x += this.dir.x * 100 * dt;
+    this.node.y += this.dir.y * 100 * dt;
+	// 射线检测
+    let res = cc.director.getPhysicsManager().rayCast(this.node.position, cc.v2(this.node.x, this.node.y + this.dir.y*100), cc.RayCastType.Closest);
+    if(res.length > 0) this.dir.y *= -1; 
+}
+```
+
 # 动作系统
+
+
 
 # 容器动作
 
