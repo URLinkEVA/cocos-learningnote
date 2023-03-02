@@ -151,11 +151,45 @@ update(dt){
 
 # 动作系统
 
+移动执行暂停
 
+还有跳跃闪烁淡入淡出
+
+tinTo变颜色
 
 # 容器动作
 
+显示隐藏翻转
+
+序列动作，例如闪几次
+
+```typescript
+let action = ccc.show();
+let action2 = cc.fadeIn(1);
+let seq = cc.sequence(action, action2);
+// 重复
+let repeat = cc.repeat(seq, 3);
+repeat = cc.repeatForever(seq);
+
+this.node.runAction(repeat);
+```
+
+```typescript
+// 闪烁完爆炸
+let seq = cc.sequence(action, action2, cc.delayTime(1),cc.callFunc(()=>{
+    
+}));
+```
+
 # 动画系统
+
+创建单色精灵
+
+挂载动画组件
+
+angle旋转物体
+
+reverse逆向播放动画 loop循环 pingpong来回
 
 # 动画曲线与事件
 
