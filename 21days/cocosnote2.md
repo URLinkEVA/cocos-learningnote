@@ -193,7 +193,54 @@ reverse逆向播放动画 loop循环 pingpong来回
 
 # 动画曲线与事件
 
+贝塞尔曲线
+
+[从零开始学图形学：10分钟看懂贝塞尔曲线 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/344934774)
+
+```typescript
+const {ccclass, property} = cc._decorator;
+
+@ccclass
+export default class PlayerControl extends cc.Component {
+
+    // onLoad () {}
+
+    start () {
+        let ani = this.getComponent(cc.Animation);
+        // 播放动画
+        ani.play("runer");
+        // ani.pause();
+        // ani.resume();
+        // ani.stop();
+    }
+
+    // update (dt) {}
+}
+```
+
 # 小游戏练习
+
+视差效果
+
+后置地图无限循环
+
+```typescript
+// 移动
+for(let bg of this.node.children){
+    bg.x -= this.speed * dt;
+    // 背景超出屏幕
+    if(bg.x <= -this.width) bg.x += this.width * 2;
+}
+```
+
+跨脚本调用
+
+```typescript
+@property(BirdControl)
+bird: BirdControl = null;
+```
+
+
 
 # 屏幕Canvas
 
