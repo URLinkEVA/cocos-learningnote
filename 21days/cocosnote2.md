@@ -240,9 +240,39 @@ for(let bg of this.node.children){
 bird: BirdControl = null;
 ```
 
+```typescript
+cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,function(e){ //按下空格监听
+     switch(e.keyCode){
+          case cc.macro.KEY.space:
+               this.player_atk();
+               break;
+     }
+}.bind(this), this);
+
+cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, (e)=>{
+    if(e.keyCode == cc.macro.KEY.space) 
+    {
+        console.log("按下空格");
+        this.bird.fly();
+    }
+});
+```
+
+## 问题
+
+鼠标触发改成键盘空格控制无反应（已解决）
+
+- 没点进界面里，直接开了f12调试
+
+通过障碍中传感器输出没反应（已解决）
+
+- 在设置好碰撞分组和物理引擎后，需要在物理刚体组件中的`Enabled Contact Listener` 属性勾选上
+
 
 
 # 屏幕Canvas
+
+
 
 # 图文混排
 
