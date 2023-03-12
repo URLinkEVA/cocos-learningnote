@@ -272,11 +272,41 @@ cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, (e)=>{
 
 # 屏幕Canvas
 
+设计分辨率
 
+Fit Height、Fit Width填充显示
+
+label string属性
+
+overflow文字排版，resize自动更新节点height属性
 
 # 图文混排
 
+富文本
+
+```typescript
+这是<color=#ff0000>红色</color>
+```
+
+```typescript
+<on click="test">这是</on><color=#ff0000>地图</color>
+    
+test(){
+    console.debug("点击了");
+}
+```
+
+点击调用test方法
+
+图文混合
+
+```typescript
+这是枣椰树<img src = "datepalm" click = "test"/>
+```
+
 # 屏幕适配与遮罩
+
+
 
 # 按钮与布局
 
