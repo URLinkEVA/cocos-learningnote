@@ -306,9 +306,25 @@ test(){
 
 # 屏幕适配与遮罩
 
+渲染组件mask
 
+以屏幕作为父节点，所有都放在canvas下
+
+屏幕适配添加ui widget组件
+
+中心位置以及align mode
 
 # 按钮与布局
+
+创建ui节点button
+
+interactable可交互
+
+normal,pressed,hover,disabled四种状态图
+
+click events挂载button，放置脚本调用方法
+
+- button target 挂载的是background
 
 # 滑动进度控件
 
