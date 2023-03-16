@@ -326,7 +326,17 @@ click events挂载button，放置脚本调用方法
 
 - button target 挂载的是background
 
+
+
+layout布局，挂载三个button
+
+人物属性对齐作用
+
+grid格子布局，做物品栏
+
 # 滑动进度控件
+
+
 
 # 输入框
 
