@@ -336,9 +336,17 @@ grid格子布局，做物品栏
 
 # 滑动进度控件
 
+滚动视图，view做了遮罩
 
+inertia惯性 减速0-1
+
+pageview滑动视图
+
+进度条ProgressBar
 
 # 输入框
+
+
 
 # 补充控件
 
