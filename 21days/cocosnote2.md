@@ -346,11 +346,25 @@ pageview滑动视图
 
 # 输入框
 
+editbox包含输入文本和占位符
 
+一些常见属性
 
 # 补充控件
 
+slider进度条
+
+toggle选择框
+
+toggleContainer三选一
+
+videoplayer视频播放，需要预加载
+
+webview套壳链接界面
+
 # 对话框练习
+
+
 
 # 数据存储
 
