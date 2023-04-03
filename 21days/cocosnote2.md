@@ -364,11 +364,137 @@ webview套壳链接界面
 
 # 对话框练习
 
-
+done
 
 # 数据存储
 
+数据存本地，二次打开可以看到，保持进度
+
+使用键值对，类似字典方式
+
+```typescript
+start () {
+    // 储存数据
+    cc.sys.localStorage.setItem("name","ayaka");
+    // 获取数据
+    let name = cc.sys.localStorage.getItem("name");
+    console.log(name);
+}
+```
+
+储存进去注释掉再获取也能找到
+
+## 删除数据
+
+```typescript
+// 移除一个数据
+cc.sys.localStorage.removeItem("name");
+// 清除所有数据
+cc.sys.localStorage.clear();
+```
+
 # Json数据
+
+数据格式：json/xml/csv
+
+客户端-客户端
+
+游戏存档->地图、坐标、等级、攻击、防御、物品...
+
+对象转字符串
+
+json：{}对象，[]数组
+
+```typescript
+const {ccclass, property} = cc._decorator;
+
+class Person{
+    id: number;
+    name: string;
+    skill: string[];
+}
+
+@ccclass
+export default class NewClass extends cc.Component {
+
+    // onLoad () {}
+
+    start () {
+        let person:Person = new Person();
+        person.id = 101;
+        person.name = "ayaka";
+        person.skill = ["起舞吧", "拿下"];
+
+        // 对象->json 序列化
+        let json1 = JSON.stringify(person);
+        // console.log(json1);
+
+        // 储存
+        cc.sys.localStorage.setItem("save1", json1);
+        
+        // json->对象
+        let person2:Person = Object.assign(new Person(), JSON.parse(json1));
+        console.log(person2.name);
+    }
+
+    // update (dt) {}
+}
+```
 
 # 数据格式
 
+person[] -> 字符串
+
+对一个JSON文件作完整的描述，需要另外写一个和字段结构一样的描述结构，这样更加清晰
+
+## json
+
+```json
+{
+	"code": 0,
+	"message": "ok",
+	"data": {
+		"id": "101",
+		"type": 0,
+		"name": "ayaka"，
+        "skill": ["起舞吧", "祭典重现"]，
+		"createTime": "2023-04-03"
+	},
+	{
+        "id": "102",
+		"type": 0,
+		"name": "yoimiya"，
+        "skill": ["点燃引芯", "拿下"]，
+		"createTime": "2023-04-03"
+	}
+	"#data": {
+		"#id": "用户ID",
+		"#type": "0=正常; 1=异常",
+		"#name": "角色名称",
+        "#skill": ["小技能", "大技能"],
+		"#createTime": "创建时间(yyyy-MM-dd)"
+	}
+}
+```
+
+## xml
+
+```xml
+<root>
+    <person id = "101">
+        <name>ayaka</name>
+        <skill>起舞吧,拿下</skill>
+    </person>
+    <person id = "102">
+        <name>yoimiya</name>
+        <skill>点燃引芯,祭典重现</skill>
+    </person>
+</root>
+```
+
+## csv
+
+```
+101,ayaka,起舞吧/拿下
+102,yoimiya,点燃引芯/祭典重现
+```
