@@ -20,6 +20,12 @@ GET请求
 
 # 网络请求2
 
+json插件[JSON-Handle 官网 - 打开json格式文件的浏览编辑器 (jsonhandle.sinaapp.com)](http://jsonhandle.sinaapp.com/)
+
+网址：html
+
+接口api json/xml
+
 
 
 # 自定义Animation
