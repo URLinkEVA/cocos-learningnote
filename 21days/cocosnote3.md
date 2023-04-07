@@ -26,9 +26,40 @@ json插件[JSON-Handle 官网 - 打开json格式文件的浏览编辑器 (jsonha
 
 接口api json/xml
 
+跨域调用，一个服务器不能直接调用另一个服务器
 
+```typescript
+const {ccclass, property} = cc._decorator;
+
+@ccclass
+export default class NewClass extends cc.Component {
+
+    // onLoad () {}
+
+    start () {
+        // url
+        let url = "http://api.douban.com/v2/movie/top256?staet=25&count=25";
+        // 请求
+        let request = cc.loader.getXMLHttpRequest();
+        request.open("GET",url,true); // 异步
+        request.onreadystatechange = ()=>{
+            // 请求状态改变
+            // 请求结束后，获取信息
+            if(request.readyState == 4 && request.status == 200){
+                console.log("请求完成");
+                console.log(request.responseText);
+            }
+        };
+        request.send();
+    }
+
+    // update (dt) {}
+}
+```
 
 # 自定义Animation
+
+
 
 # Socket
 
