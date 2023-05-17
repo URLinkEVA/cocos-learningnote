@@ -4,7 +4,7 @@
 
 近年来，互联网游戏行业发展迅速，todo，当前游戏h5活动短周期大需求，根据一个简单易上手的活动快速了解针对版本内容前瞻，仅供娱乐
 
-本文在分析国内外研究的基础上，对2D地图探索轻量级游戏的设计意义、设计重点、设计状况进行了介绍。通过Typescript语言开发学习游戏引擎cocos相关知识，并结合Tiledmap制作轻量级游戏渲染地图。游戏设计还引入了语音合成技术，使用了飞桨（PaddlePaddle）深度学习框架下语音方向的开源模型库paddlespeech，进行了声音分类、语音唤醒、声纹识别、语音识别、语音翻译、语音合成、声音克隆的技术实现，并对不同网络模型采取搭建和训练。代码开源在github.com/URLinkEVA/paperjour。
+本文在分析国内外研究的基础上，对2D地图探索轻量级游戏的设计意义、设计重点、设计状况进行了介绍。通过 Typescript 语言开发学习游戏引擎 Cocos 相关知识以及Canvas渲染技术，并结合 Tiledmap 制作轻量级游戏渲染地图。游戏设计还引入了语音合成技术，使用了飞桨（PaddlePaddle）深度学习框架下语音方向的开源模型库 paddlespeech ，进行了声音分类、语音合成以及声音克隆的技术实现，并对不同网络模型采取搭建和训练。代码开源在github.com/URLinkEVA/paperjour。
 
 关键字： 2d游戏   Cocos2d  Typescript  语音合成  深度学习
 
@@ -21,9 +21,21 @@ Based on the analysis of the research at home and abroad, this paper introduces 
 
 当前游戏角色声音存在不稳定性，无法满足游戏行业需求
 
+随着人们生活质量的不断提高以及网络的普及， 人们的业余生活质量要求也在不断提升，选择一款好玩精美，画面音质好，品质优良的休闲游戏已经成为一种流行的休闲方式。可以说在人们的日常生活中，除了工作、学习，玩自己喜欢的游戏正在成为一种时尚。而且休闲类游戏大概是覆盖年龄段最广的一类，俄罗斯方块、五子棋、推箱子非常经典，休闲类游戏曾经给了不少玩家们一个美好的回忆，也是目前游戏平台非常广的一类游戏。所以， 开发出大家都比较喜欢的高品质的休闲互动游戏，将会受到人们的普遍欢迎。让人们在工作学习之余，享受游戏的快乐，也是一款游戏真正成功的意义。
+
 ## 1.2 课题研究现状
 
 版本宣发，语音合成技术
+
+截至2021年，有80%的App将全部或部分基于HTML5。这意味着大部分App的内容都将是以网页的形式呈现，典型的例子包括微信、Facebook、Twitter等。谷歌浏览器于9月1日起不再自动播放Flash。亚马逊宣布旗下网络的所有广告将不再使用Flash。在可预见的未来，Flash广告将被HTML5广告所替代。各大主流社交平台对H5分享的支持都是比较友好的，企业对H5的需求一直在增加，定制化H5的价格也是很高。
+
+​		H5作品的最根本目的就是向用户传递信息。比起普通的PPT和视频，H5因为其特效众多，场景切换方便，所以更加适合故事的讲述。一个优秀的故事性H5页面，通常能够极大引起用户的共鸣，达到意想不到的效果。
+
+​		H5作品与传统作品最明显的区别之一就是H5作品中拥有众多的互动功能。通过这些互动功能，用户可以深度参与到H5作品中，更为贴切地感受到您想要传达的信息，同时也会给用户留下更深的印象。参与感比较强的作品中最具有代表性的就是各类H5小游戏。
+
+​		H5作品中拥有大量的活动插件，例如投票、表单等功能。通过这些插件，H5能达到其他宣传途径遥不可及的宣传效果。尤其是在游戏类H5日益频繁的今天，更能引起用户的注意。
+
+
 
 ### 1.2.1 国外研究现状
 
@@ -41,7 +53,7 @@ paddlespeech
 
 （1）研究了基于深度学习的中文语音合成方法。该方法使用了非自回归的序列到序列模型，并行化编码及解码步骤。针对中文语言独有特点，本文增加了前端处理流程，完成了多音字消歧、文本规范化和韵律预测等处理功能。此外，在模型中添加了更多的语音特征如音高、能量和时长等，增加了音频特征。最后使用了梅尔-生成对抗网络声码器，重构语音波形。
 
-（2）研究了基于迁移学习的四川话语音合成方法。针对四川话语言特点，研究了四川方言特殊发音、语义以及特殊词汇，并构建了四川方言数据集，添加了四川方言的文本处理前端，对输入的文本进行方言化处理，将普通话中的文字与四川方言进行映射。为得到干净数据集，研究了原始音频的维纳滤波降噪算法。在中文语音合成模型的基础上使用迁移学习（Transfer-learning）的方式对原模型进行微调（Fine-tune），实现利用较少数据集合成质量较高的四川话语音。实验比较了在不同学习率和降噪情况下，模型合成音频的效果。
+（2）研究了基于模型上的微调训练合成方法。
 
 （3）研究了基于深度学习的中英文多说话人语音合成方法。针对中英文中语种不同的问题，利用卡梅隆大学音素词典将中英文音素采用统一的形式表示，构建语种编码器。利用语音特征提取算法，提取说话人音频特征，并通过自注意力机制的池化层将特征转换为固定维度，输出说话人嵌入向量，构建多说话人编码器。采用中文和英文的多说话人数据集混合训练，最后评估了中英文合成音频的自然度和对应说话人的相似度。
 
@@ -53,13 +65,13 @@ paddlespeech
 
 第一章，绪论。分析了当前语音合成技术研究的背景及意义和当前国内外研究现状，对比了传统语音合成以及深度学习语音合成方法，并介绍了本文主要研究内容以及论文结构。
 
-第二章，理论基础及背景知识。介绍语音合成中相关的语音学基础，拼音、音素、国标等相关知识，对深度学习中基础知识也进行简单介绍，如循环神经网络、注意力机制等，并简单描述了深度学习语音合成所使用的各大模块。
+第二章，理论基础及相关技术。介绍游戏开发中针对2d游戏的 Canvas 渲染技术和近期新起的 TypeScript 语言等相关知识，再由声音分类展开到音频文件的波形信息，并从公式方面对傅里叶变换介绍到项目涉及的短时傅里叶，再简单描述了音频所需的识别特征必不可少的梅尔频谱。
 
-第三章，地图的设计与实现。基于tiledmap开发地图。
+第三章，地图的设计与实现。基于Tiledmap开发地图。
 
 第四章，游戏整的设计与实现。首先介绍 Cocos 的相关知识，接着按照模块化的方法对整个游戏的软件功能需求进行细致分析，并详细介绍其每个模块的具体实现过程。
 
-第五章，深度学习语音
+第五章，深度学习语音技术研究。
 
 第六章，总结与展望。对本文游戏和语音两部分内容进行了总结，分析了研究内容的可取与不足之处，并对未来可拓展的研究重点进行了展望。
 
@@ -67,7 +79,7 @@ paddlespeech
 
 自己话写相关理论基础  功能点
 
-## 2.1 canvas渲染技术
+## 2.1 Canvas渲染技术
 
 基于HTML 的图形渲染主要有 SVG 和 Canvas 两种主流解决方案，SVG 特点是操作简单且不依赖分辨率，适合区域大面积渲染例如百度地图这种应用程序，而 Canvas 潜力更大，能以图片形式保存场景适合图像密集型的游戏。在简单的统计图表性能方面上两者差别不明显，但在关系分析这种场景下，SVG 基本上是千这个规模，而 Canvas 则能提高1至2个数量级，例如在 1W-10W 下同样可以做到流畅交互。本文该部分主要关注如何使用 Canvas 绘制出更多的图形，提供更加流畅的交互。本文从渲染机制、性能瓶颈、绘制更多的图形、让交互更流畅、webGL 实现 2D 渲染逐步展开讲解。
 
@@ -195,11 +207,13 @@ function repaint() {
 
 TypeScript 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个严格超集，并添加了可选的静态类型和基于类的面向对象编程。TypeScript 的设计目标是开发大型应用，然后转译成 JavaScript 运行。由于 TypeScript 是 JavaScript 的超集，任何现有的 JavaScript 程序都是合法的 TypeScript 程序。
 
+Cocos 很多项目开发者之前都是使用强类型语言例如 C++或者C#来编写游戏，因此在使用 Cocos 的时候也希望能够使用强类型语言来增强项目在较大规模团队中的表现。所以从 v1.5 版本开始 Cocos 官方支持在项目中使用 TypeScript 编写脚本，用户的源码可以完全使用 TypeScript，或者 TypeScript 和 JavaScript 混合使用进行游戏开发。和其他 JavaScript 脚本一样，项目 assets 目录下的 TypeScript 脚本（.ts 文件) 在创建或修改后激活编辑器，就会被编译成兼容浏览器标准的 ES5 JavaScript 脚本，编译后的脚本存放在项目下的 library（还包括其他资源）目录。
+
+TypeScript 强制要求开发者在编写代码时指定变量和函数的类型，这可以减少错误和调试时间。如果在编译期间发现类型错误 TypeScript 会发出警告或错误，而不是等到运行时才发现问题。由于 TypeScript 强制执行类型检查和类型推断，因此可以减少错误和不必要的重构。这种类型的强制执行可以使代码更加易于阅读和理解，因为开发者可以立即看到变量的预期类型。此外 TypeScript 还提供了一些工具和插件，例如 Lint 和 Prettier ，可以帮助自动化代码格式化和检查。TypeScript 通过提供更好的类型检查和智能提示，可以大幅减少开发时间。提供的高级功能例如类和接口可以使代码更加模块化和可重用。强制执行类型检查和类型推断能够提高代码质量，这可以减少代码中的错误和漏洞，并使代码更加稳定可靠。TypeScript 可以通过编译器将代码转换为 JavaScript 代码，以便在浏览器或其他 JavaScript 运行时环境中运行，这也使得 TypeScript 可以在多种平台上使用，包括 Web 、Node.js 等，所以在本文项目实现上选用了 TypeScript 语言进行游戏的开发。
 
 
 
 
-- 
 
 ## 2.3 声音分类
 
@@ -223,7 +237,7 @@ TypeScript 是一种由微软开发的自由和开源的编程语言。它是 Ja
 
 
 
-下面通过一个例子观察音频文件的波形，直观地了解数字音频文件的包含的内容。佩佩wav展示
+下面通过一个例子观察音频文件的波形，直观地了解数字音频文件的包含的内容。
 
 ```python
 from paddleaudio import load
@@ -237,17 +251,63 @@ plt.plot(data)
 plt.show()
 ```
 
-
+![image-20230514155539891](D:\term4\毕业设计\论文写稿\image-20230514155539891.png)
 
 ## 2.4 短时傅里叶
 
-对于一段音频，一般会将整段音频进行分帧，每一帧含有一定长度的信号数据，一般使用 25ms，帧与帧之间的移动距离称为帧移，一般使用 10ms，然后对每一帧的信号数据加窗后，进行离散傅立叶变换（DFT）得到频谱图。
+平稳信号是指其统计特性不随时间变化的信号。对于一个长度为N的平稳信号x(t)，如果它的均值和方差在整个时间段内保持不变，那么就称它为平稳信号。与之相反，如果均值和方差在不同时间段内发生变化，那么就称它为非平稳信号。平稳信号和非平稳信号的主要区别在于它们的统计特性，由于平稳信号的统计特性不随时间变化，因此它们可以用相同的数学模型来描述和分析。而非平稳信号的统计特性随时间变化，所以它们需要不同的数学模型来描述和分析。在实际应用中，许多信号都不是完全平稳的，例如心电图、语音信号等。对于这些非平稳信号，我们需要采用特殊的方法来进行分析和处理，例如差分方程、自回归模型等。
 
-通过按照上面操作对一段音频进行分帧后，我们可以用傅里叶变换来分析每一帧信号的频率特性。将每一帧的频率信息拼接后，可以获得该音频不同时刻的频率特征——Spectrogram，也称作为语谱图。
+通常傅里叶变换只适合处理平稳信号，由于非平稳信号频率特性会随时间变化，为了捕获这一时变特性，需要对信号进行时频分析，包括短时傅里叶变换、小波变换、希尔伯特变换、希尔伯特黄变换这几种变换方法。
 
-https://zhuanlan.zhihu.com/p/19763358
+例如一个连续信号的傅里叶变换和它的反变换
+$$
+F(\omega ) =  F[f(t)]  =  \int_{ - \infty }^{ + \infty } f{\left( {t} \right)} {e^{ - j\omega t}}dt
+$$
 
-https://www.yvonshong.com/2016/04/09/fft/
+$$
+F(t) =  {F^{ - 1}}[F(\omega )]  =  {1 \over {2\pi }}\int_{ - \infty }^{ + \infty } {F\left( \omega  \right)} {e^{j\omega t}}d\omega
+$$
+
+在实际应用中计算机只能处理离散信号，需要通过对连续信号进行时域采样得到离散样本，对它进行傅里叶变换得到离散时间傅里叶变换(DTFT)
+$$
+X(\omega ) = \sum\limits_{n =  - \infty }^\infty  {x(n){e^{ - j\omega n}}} 
+$$
+变换后得到的频域值仍然是连续的，需要继续对频域进行采样得到离散傅里叶变换(DFT)，当前计算机中常用的快速傅里叶变换(DFT)，就是FFT的快速算法。
+$$
+X(k) = \sum\limits_{n = 0}^{N - 1} {x(n){e^{ - j{{2\pi kn} \over N}}}}
+$$
+利用频谱分析可以发现一些时域中看不到的信息，比如信号的频率分量组成、信号能量在频域上的分布等。但是傅里叶变换是一种全局的变换，时域信号经过傅里叶变换后，就变成了频域信号，从频域上无法看到时域信息，从傅里叶变换和反变换公式上来说，进行正变换时积分区间为整个时域，变换结果不包含时域信息，反变换同理。如果信号的频率特性在任何时间都不发生改变，即该信号是平稳信号时，使用傅里叶变换没有任何影响，当该信号是非平稳信号时，时域信息就极为重要。例如图中的分别是0~100Hz线性递增扫频信号和100~0Hz线性递减扫频信号的幅度谱，这两个信号都是非平稳信号，可以看到它们的幅度谱是相同的，但我们无法知道每一个频率分量出现的时间，即无法知道扫频信号的模式。
+
+![image-20230514145348039](D:\term4\毕业设计\论文写稿\image-20230514145348039.png)
+
+对于一些复杂的信号和它的幅度谱，例如两路扫频信号叠加后的信号和它的幅度谱，通过时域信号或者幅度谱很难分析非平稳信号的特征。所以需要引入一个时频分析( Time-Frequency Analysis)方法——短时傅里叶变换(STFT)。
+
+$$
+x(n,\omega ) = \sum\limits_{m =  - \infty }^\infty  {x(m)\omega (n - m){e^{ - j\omega m}}}
+$$
+其中 $x(m)$ 为输入信号，$${\omega (m)}$$是窗函数，它在时间上反转并且有n个样本的偏移量。 $$x(n,\omega )$$是时间 $$n$$ 和频率 $$\omega $$ 的二维函数，这个信号分析带来了时频分析的概念，同时给了我们时间和频率的信息。其方法形象化的描述就是把整个时域过程分解成无数个等长的小过程，每个小过程近似平稳，再做傅里叶变换，就知道得知在哪个时间点上出现了什么频率。它将信号的时域和频域联系起来，可以通过它对信号进行时频分析，比如 $$S(n,\omega ) = |X(n,\omega ){|^2}$$ 就是语音信号所谓的语谱图(Spectrogram)。
+
+语谱图是一种用于分析和研究语音信号的时频特征和声学特征的方法。在计算语谱图时，采用不同窗长度可以得到两种不同的语谱图，即窄带和宽带语谱图。长时窗通常用于计算窄带语谱图，短时窗则用于计算宽带语谱图。窄带语谱图具有较高的频率分辨率和较低的时间分辨率，而宽带语谱图则具有较高的时间分辨率和较低的频率分辨率。选择合适的窗长度需要根据具体的研究目的和数据特征进行综合考虑。窄带语谱图适合用于分析和识别语音中的特定频率成分，例如基频和谐波分量；而宽带语谱图则适合用于研究语音的时频特性和声学特征。同时，还需要注意窗函数的选择和处理，以保证得到准确可靠的语谱图结果。
+
+#### todo参考文献
+
+百纳知识. 浅析信号处理：人们认识信号本质的大飞跃[EB/OL].(2018-08-14)[2023-05-12]. https://www.sohu.com/a/246972969_607269
+
+Marple L . Computing the discrete-time "analytic" signal via FFT[J]. IEEE Transactions on Signal Processing, 1999.
+
+Qian S , Chen D . Joint time-frequency analysis[J]. IEEE Signal Processing Magazine, 1999, 16(2):P.52-67.
+
+ frostime. 时频分析之STFT：短时傅里叶变换的原理与代码实现（非调用Matlab API）[EB/OL].(2020-06-20)[2023-05-14]. https://blog.csdn.net/frostime/article/details/106816373
+
+Heinrich. 傅里叶分析之掐死教程（完整版）[EB/OL].(2014-06-06)[2023-05-14]. https://zhuanlan.zhihu.com/p/19763358
+
+Yvon Shong. 深入理解快速傅里叶变换[EB/OL].(2016-04-09)[2023-05-14].https://www.yvonshong.com/2016/04/09/fft/
+
+
+
+处理音频通常会将整段音频进行按25ms间隔来分帧，每一帧含有一定长度的信号数据，帧之间的移动距离采用10ms，然后对每一帧的信号数据加窗后，进行离散傅立叶变换（DFT）得到频谱图。对一段音频进行分帧后，通过傅里叶变换来分析每一帧信号的频率特性。将每一帧的频率信息拼接后，可以获得该音频不同时刻的频率特征，即为上文谈到的语谱图。
+
+![fft](D:\term4\毕业设计\论文写稿\fft.png)
 
 采用 paddle.signal.stft 演示提取示例音频的频谱特征，并进行可视化
 
@@ -274,7 +334,11 @@ plt.imshow(spec[:100, :], origin='lower')
 plt.show()
 ```
 
-## 2.5 mel频谱
+<img src="D:\term4\毕业设计\论文写稿\image-20230514155728548.png" alt="image-20230514155728548" style="zoom:50%;" />
+
+
+
+## 2.5 梅尔频谱
 
 研究表明，人类对声音的感知是非线性的，随着声音频率的增加，人对更高频率的声音的区分度会不断下降。
 
@@ -282,19 +346,19 @@ plt.show()
 
 因此，学者提出了梅尔频率，在该频率计量方式下，人耳对相同数值的频率变化的感知程度是一样的。
 
-![img](D:\term4\毕业设计\论文写稿\clip_image002-16838759425802.png)
+<img src="D:\term4\毕业设计\论文写稿\clip_image002-16838759425802.png" alt="img" style="zoom:50%;" />
 
 图片来源：https://www.researchgate.net/figure/Curve-relationship-between-frequency-signal-with-its-mel-frequency-scale-Algorithm-1_fig3_221910348
 
 关于梅尔频率的计算，其会对原始频率的低频的部分进行较多的采样，从而对应更多的频率，而对高频的声音进行较少的采样，从而对应较少的频率。使得人耳对梅尔频率的低频和高频的区分性一致。
 
-![img](D:\term4\毕业设计\论文写稿\clip_image002-16838760116144.png)
+<img src="D:\term4\毕业设计\论文写稿\clip_image002-16838760116144.png" alt="img"  />
 
 图片来源：https://ww2.mathworks.cn/help/audio/ref/mfcc.html
 
 Mel Fbank 的计算过程如下，而我们一般都是使用 LogFBank 作为识别特征：
 
-![img](D:\term4\毕业设计\论文写稿\clip_image002-16838760229506.png)
+<img src="D:\term4\毕业设计\论文写稿\clip_image002-16838760229506.png" alt="img"  />
 
 图片来源：https://ww2.mathworks.cn/help/audio/ref/mfcc.html
 
@@ -339,11 +403,19 @@ plt.show()
 
 ## 3.1 Tiledmap
 
+要制作一个合格的 2D 地图探索游戏，需要一个完整的游戏地图场景来作为载体。在 2D 游戏中，要制作游戏地图特别是涉及多个关卡地图，业界通常都是使用 Tiledmap 瓦片地图来实现， 因为其操作简单，效率很高，支持的软件完善可以随时迁移，很多游戏都采用它来设计地图，例如小时候耳熟能详的平面游戏超级玛利亚、坦克大战、魂斗罗等等。
+
+瓦片地图，简单地说就是一个个瓦片堆积起来的一个地图。如果有 iOS 游戏开发经验并熟悉 SpriteKit 的话，对 TileMap 会非常了解， Xcode 对瓦片地图的支持非常完善，功能很强大也易于上手，缺点是 Xcode 只支持 Mac OS 或者 iOS 系统。另外在 Unity 2018 版本之前，使用 Unity制作 2D 游戏的地图也是很不方便的，如果想在 Android 或者 Window/Linux 等其他操作系统上开发游戏，那么需要使用其他的第三方软件来辅助制作地图了。
+
+一个游戏场景就是一个简单的世界，我们可以为这个世界添加很多有趣的元素，让玩家有兴趣去探索，这里使用瓦片地图来制作游戏场景，实际上，它是由很多小瓦片组成，这些小瓦片称之为Tile 。瓦片可以很简单，也可以非常复杂，但是在同一个游戏世界里其大小都是统一的，瓦片的类型主要有三种类型： 90° 直角俯视地图（ Orthogonal/Square ）、45° 等距斜视地图（ Isometric ）、等六边形地图（ Hexagonal ）。这三种类型在 Godot 中都是支持的，本文直接采用第一种。
+
 ## 3.2 三层
 
 # 第四章 游戏的设计与实现
 
-## 4.1 mapControl
+先写拼图碎片，讲解原理以及实现吸附效果，判断拼接完成，然后场景切换，大世界地图进行移动，然后交互物体，弹窗对话，说出语音
+
+## 4.1 拼图
 
 ## 4.2 场景切换
 
@@ -373,13 +445,9 @@ plt.show()
 
 当前的主流方法分为基于统计参数的语音合成、波形拼接语音合成、混合方法以及端到端神经网络语音合成。基于参数的语音合成包含隐马尔可夫模型（Hidden Markov Model,HMM）以及深度学习网络（Deep Neural Network，DNN）。端到端的方法保函声学模型+声码器以及“完全”端到端方法。
 
-语音合成流水线包含 文本前端（Text Frontend） 、声学模型（Acoustic Model） 和 声码器（Vocoder） 三个主要模块:
+![image-20230517142957068](D:\term4\毕业设计\论文写稿\image-20230517142957068.png)
 
-- 通过文本前端模块将原始文本转换为字符/音素。
-
-- 通过声学模型将字符/音素转换为声学特征，如线性频谱图、mel 频谱图、LPC 特征等。
-
-- 通过声码器将声学特征转换为波形。
+语音合成流水线包含 文本前端（Text Frontend） 、声学模型（Acoustic Model） 和 声码器（Vocoder） 三个主要模块，通过文本前端模块将原始文本转换为字符/音素，通过声学模型将字符/音素转换为声学特征，如线性频谱图、mel 频谱图、LPC 特征等，通过声码器将声学特征转换为波形。
 
 
 
@@ -408,19 +476,258 @@ plt.show()
 
 （输入给声学模型之前，还需要把音素序列转换为 id）
 
-其中最重要的模块是 文本正则化 模块和 字音转换（TTS 中更常用 G2P 代指） 模块。
+其中最重要的模块是文本正则化模块和字音转换（TTS 中更常用 G2P 代指） 模块。
 
 各模块输出示例:
 
 ```
+• Text: 全国一共有112所211高校
+• Text Normalization: 全国一共有一百一十二所二一一高校
+• Word Segmentation: 全国/一共/有/一百一十二/所/二一一/高校/
+• G2P（注意此句中“一”的读音）:
+    quan2 guo2 yi2 gong4 you3 yi4 bai3 yi1 shi2 er4 suo3 er4 yao1 yao1 gao1 xiao4
+    （可以进一步把声母和韵母分开）
+    q uan2 g uo2 y i2 g ong4 y ou3 y i4 b ai3 y i1 sh i2 er4 s uo3 er4 y ao1 y ao1 g ao1 x iao4
+    （把音调和声韵母分开）
+    q uan g uo y i g ong y ou y i b ai y i sh i er s uo er y ao y ao g ao x iao
+    0 2 0 2 0 2 0 4 0 3 ...
+• Prosody (prosodic words #1, prosodic phrases #2, intonation phrases #3, sentence #4):
+    全国#2一共有#2一百#1一十二所#2二一一#1高校#4
+    （分词的结果一般是固定的，但是不同人习惯不同，可能有不同的韵律）
+```
+
+文本前端模块的设计需要结合很多专业的语义学知识和经验。人类在读文本的时候可以自然而然地读出正确的发音，但是这些先验知识计算机并不知晓。 例如，对于一个句子的分词：
 
 ```
+我也想过过过儿过过的生活
+我也想/过过/过儿/过过的/生活
+
+货拉拉拉不拉拉布拉多
+货拉拉/拉不拉/拉布拉多
+
+南京市长江大桥
+南京市长/江大桥
+南京市/长江大桥
+```
+
+或者是词的变调和儿化音：
+
+```
+你要不要和我们一起出去玩？
+你要不（2声）要和我们一（4声）起出去玩（儿）？
+
+不好，我要一个人出去。
+不（4声）好，我要一（2声）个人出去。
+
+（以下每个词的所有字都是三声的，请你读一读，体会一下在读的时候，是否每个字都被读成了三声？）
+纸老虎、虎骨酒、展览馆、岂有此理、手表厂有五种好产品
+```
+
+又或是多音字，这类情况通常需要先正确分词：
+
+```
+人要行，干一行行一行，一行行行行行;
+人要是不行，干一行不行一行，一行不行行行不行。
+
+佟大为妻子产下一女
+
+海水朝朝朝朝朝朝朝落
+浮云长长长长长长长消
+```
+
+PaddleSpeech Text-to-Speech的文本前端解决方案:
+
+- [文本正则]([PaddleSpeech/examples/other/tn at develop · PaddlePaddle/PaddleSpeech · GitHub](https://github.com/PaddlePaddle/PaddleSpeech/tree/develop/examples/other/tn))
+
+- [G2P]([PaddleSpeech/examples/other/g2p at develop · PaddlePaddle/PaddleSpeech · GitHub](https://github.com/PaddlePaddle/PaddleSpeech/tree/develop/examples/other/g2p))
+
+  - 多音字模块: pypinyin/g2pM
+
+  - 变调模块: 用分词 + 规则
+
+
+
+构造文本前端对象
+
+传入`phones_dict`，把相应的`phones`转换成`phone_ids`。
+
+```
+# 传入 phones_dict 会把相应的 phones 转换成 phone_ids
+frontend = Frontend(phone_vocab_path=phones_dict)
+print("Frontend done!")
+100%|██████████| 575056/575056 [00:13<00:00, 41310.49it/s]
+[2023-5-14 11:17:55,818] [    INFO] - Downloading https://bj.bcebos.com/paddle-hapi/models/bert/bert-base-chinese-vocab.txt and saved to /home/aistudio/.paddlenlp/models/bert-base-chinese
+[2023-5-14 11:17:55,822] [    INFO] - Downloading bert-base-chinese-vocab.txt from https://bj.bcebos.com/paddle-hapi/models/bert/bert-base-chinese-vocab.txt
+100%|██████████| 107k/107k [00:00<00:00, 6.80MB/s]
+[2023-5-14 11:17:55,917] [    INFO] - tokenizer config file saved in /home/aistudio/.paddlenlp/models/bert-base-chinese/tokenizer_config.json
+[2023-5-14 11:17:55,919] [    INFO] - Special tokens file saved in /home/aistudio/.paddlenlp/models/bert-base-chinese/special_tokens_map.json
+Frontend done!
+```
+
+调用文本前端
+
+文本前端对输入数据进行正则化时会进行分句，若`merge_sentences`设置为`False`，则所有分句的 `phone_ids` 构成一个 `List`；若设置为`True`，`input_ids["phone_ids"][0]`则表示整句的`phone_ids`。
+
+```
+input = "你好，欢迎使用百度飞桨框架进行深度学习研究！"
+input_ids = frontend.get_input_ids(input, merge_sentences=True, print_info=True)
+phone_ids = input_ids["phone_ids"][0]
+print("phone_ids:%s"%phone_ids)
+Building prefix dict from the default dictionary ...
+[2023-5-14 11:17:58] [DEBUG] [__init__.py:113] Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+[2023-5-14 11:17:59] [DEBUG] [__init__.py:147] Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.760 seconds.
+[2023-5-14 11:17:59] [DEBUG] [__init__.py:165] Loading model cost 0.760 seconds.
+Prefix dict has been built successfully.
+[2023-5-14 11:17:59] [DEBUG] [__init__.py:166] Prefix dict has been built successfully.
+```
+
+```
+text norm results:
+['你好，', '欢迎使用百度飞桨框架进行深度学习研究！']
+----------------------------
+g2p results:
+[['n', 'i2', 'h', 'ao3', 'sp', 'h', 'uan1', 'ing2', 'sh', 'iii3', 'iong4', 'b', 'ai3', 'd', 'u4', 'f', 'ei1', 'j', 'iang3', 'k', 'uang1', 'j', 'ia4', 'j', 'in4', 'x', 'ing2', 'sh', 'en1', 'd', 'u4', 'x', 've2', 'x', 'i2', 'ian2', 'j', 'iou1']]
+----------------------------
+phone_ids:Tensor(shape=[38], dtype=int64, place=Place(gpu:0), stop_gradient=True,
+       [155, 73 , 71 , 29 , 179, 71 , 199, 126, 177, 115, 138, 37 , 9  , 40 ,
+        186, 69 , 46 , 151, 89 , 152, 204, 151, 80 , 151, 123, 260, 126, 177,
+        51 , 40 , 186, 260, 251, 260, 73 , 83 , 151, 140])
+```
+
+用深度学习实现文本前端
+
+![image-20230517143932024](D:\term4\毕业设计\论文写稿\image-20230517143932024.png)
 
 
 
 ### 5.1.2 声学模型
 
+声学模型将字符/音素转换为声学特征，如线性频谱图、mel 频谱图、LPC 特征等，声学特征以 “帧” 为单位，一般一帧是 10ms 左右，一个音素一般对应 5~20 帧左右, 声学模型需要解决的是 “不等长序列间的映射问题”，“不等长”是指，同一个人发不同音素的持续时间不同，同一个人在不同时刻说同一句话的语速可能不同，对应各个音素的持续时间不同，不同人说话的特色不同，对应各个音素的持续时间不同。这是一个困难的“一对多”问题。
+
+```
+# 卡尔普陪外孙玩滑梯
+000001|baker_corpus|sil 20 k 12 a2 4 er2 10 p 12 u3 12 p 9 ei2 9 uai4 15 s 11 uen1 12 uan2 14 h 10 ua2 11 t 15 i1 16 sil 20
+```
+
+声学模型主要分为自回归模型和非自回归模型，其中自回归模型在 `t` 时刻的预测需要依赖 `t-1` 时刻的输出作为输入，预测时间长，但是音质相对较好，非自回归模型不存在预测上的依赖关系，预测时间快，音质相对较差。
+
+主流声学模型发展的脉络:
+
+- 自回归模型:
+  - Tacotron
+  - Tacotron2
+  - Transformer TTS
+- 非自回归模型:
+  - FastSpeech
+  - SpeedySpeech
+  - FastPitch
+  - FastSpeech2
+
+
+
+这里使用fastspeech2
+
+<img src="D:\term4\毕业设计\论文写稿\image-20230517144122585.png" alt="image-20230517144122585" style="zoom:50%;" />
+
+PaddleSpeech TTS 实现的 FastSpeech2 与论文不同的地方在于，前者使用的的是 phone 级别的 `pitch` 和 `energy`(与 FastPitch 类似)，这样的合成结果可以更加稳定。
+
+<img src="D:\term4\毕业设计\论文写稿\image-20230517144204544.png" alt="image-20230517144204544" style="zoom:50%;" />
+
+[语音合成模型的发展及改进](https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/docs/source/tts/models_introduction.md)
+
+初始化声学模型 FastSpeech2
+
+```
+with open(phones_dict, "r") as f:
+    phn_id = [line.strip().split() for line in f.readlines()]
+vocab_size = len(phn_id)
+print("vocab_size:", vocab_size)
+odim = fastspeech2_config.n_mels
+model = FastSpeech2(
+    idim=vocab_size, odim=odim, **fastspeech2_config["model"])
+# 加载预训练模型参数
+model.set_state_dict(paddle.load(fastspeech2_checkpoint)["main_params"])
+# 推理阶段不启用 batch norm 和 dropout
+model.eval()
+stat = np.load(fastspeech2_stat)
+# 读取数据预处理阶段数据集的均值和标准差
+mu, std = stat
+mu, std = paddle.to_tensor(mu), paddle.to_tensor(std)
+# 构造归一化的新模型
+fastspeech2_normalizer = ZScore(mu, std)
+fastspeech2_inference = FastSpeech2Inference(fastspeech2_normalizer, model)
+fastspeech2_inference.eval()
+print("FastSpeech2 done!")
+```
+
+调用声学模型
+
+```
+with paddle.no_grad():
+    mel = fastspeech2_inference(phone_ids)
+print("shepe of mel (n_frames x n_mels):")
+print(mel.shape)
+# 绘制声学模型输出的 mel 频谱
+fig, ax = plt.subplots(figsize=(16, 6))
+im = ax.imshow(mel.T, aspect='auto',origin='lower')
+plt.title('Mel Spectrogram')
+plt.xlabel('Time')
+plt.ylabel('Frequency')
+plt.tight_layout()
+```
+
+<img src="D:\term4\毕业设计\论文写稿\image-20230517144349757.png" alt="image-20230517144349757" style="zoom:50%;" />
+
+
+
 ### 5.1.3 声码器
+
+声码器将声学特征转换为波形。声码器需要解决的是 “信息缺失的补全问题”。信息缺失是指，在音频波形转换为频谱图的时候，存在相位信息的缺失，在频谱图转换为 mel 频谱图的时候，存在频域压缩导致的信息缺失；假设音频的采样率是16kHZ, 一帧的音频有 10ms，也就是说，1s 的音频有 16000 个采样点，而 1s 中包含 100 帧，每一帧有 160 个采样点，声码器的作用就是将一个频谱帧变成音频波形的 160 个采样点，所以声码器中一般会包含上采样模块。
+
+与声学模型类似，声码器也分为自回归模型和非自回归模型, 更细致的分类如下:
+
+- Autoregression
+  - WaveNet
+  - WaveRNN
+  - LPCNet
+- Flow
+  - WaveFlow
+  - WaveGlow
+  - FloWaveNet
+  - Parallel WaveNet
+- GAN
+  - WaveGAN
+  - Parallel WaveGAN
+  - MelGAN
+  - Style MelGAN
+  - Multi Band MelGAN
+  - HiFi GAN
+- VAE
+  - Wave-VAE
+- Diffusion
+  - WaveGrad
+  - DiffWave
+
+
+
+addleSpeech TTS 主要实现了百度的 WaveFlow 和一些主流的 GAN Vocoder, 在本文中使用 Parallel WaveGAN 作为声码器。
+
+<img src="D:\term4\毕业设计\论文写稿\image-20230517144624912.png" alt="image-20230517144624912" style="zoom:50%;" />
+
+各 GAN Vocoder 的生成器和判别器的 Loss 的区别如下表格所示:
+
+|       Model        |                        Generator Loss                        |                    Discriminator Loss                    |
+| :----------------: | :----------------------------------------------------------: | :------------------------------------------------------: |
+|      Mel GAN       |             adversial loss<br/>Feature Matching              |                Multi-Scale Discriminator                 |
+| Parallel Wave GAN  |        adversial loss<br/>Multi-resolution STFT loss         |                      adversial loss                      |
+| Multi-Band Mel GAN | adversial loss<br/>full band Multi-resolution STFT loss<br/>sub band Multi-resolution STFT loss |                Multi-Scale Discriminator                 |
+|      HiFi GAN      | adversial loss<br/>Feature Matching<br/>Mel-Spectrogram Loss | Multi-Scale Discriminator<br/>Multi-Period Discriminator |
+
+
+
+
 
 ## 5.2 声音克隆
 
