@@ -2,48 +2,69 @@
 
 # 摘要
 
-近年来，互联网游戏行业发展迅速，todo，当前游戏h5活动短周期大需求，根据一个简单易上手的活动快速了解针对版本内容前瞻，仅供娱乐
+根据近日中国游戏产业年会现场正式发布的《2022年中国游戏产业报告》显示，2022年中国游戏市场实际销售收入2658.84亿元，同比下降10.33%。游戏用户规模6.64亿，同比下降0.33%。继2021年规模增长明显放缓之后，又出现过去八年来的首次下降，表明产业发展已经进入存量市场时代。面对存量市场且用户年龄层更迭的背景下，研发符合年轻人需求的创新游戏则是关键，而年轻用户对游戏品质的高要求，加速了游戏行业进入优胜略汰时代，以及内容创意型游戏的兴起。当前游戏需要做到版本更新周期短宣发力度大，可以通过一个简单易上手的轻量级游戏快速了解版本内容。
 
-本文在分析国内外研究的基础上，对2D地图探索轻量级游戏的设计意义、设计重点、设计状况进行了介绍。通过 Typescript 语言开发学习游戏引擎 Cocos 相关知识以及Canvas渲染技术，并结合 Tiledmap 制作轻量级游戏渲染地图。游戏设计还引入了语音合成技术，使用了飞桨（PaddlePaddle）深度学习框架下语音方向的开源模型库 paddlespeech ，进行了声音分类、语音合成以及声音克隆的技术实现，并对不同网络模型采取搭建和训练。代码开源在github.com/URLinkEVA/paperjour。
+本文在分析国内外研究的基础上，对2D地图探索轻量级游戏的设计意义、设计重点、设计状况进行了介绍。通过 Typescript 语言开发学习游戏引擎 Cocos 相关知识以及Canvas渲染技术，并结合 Tiledmap 制作轻量级游戏渲染地图。游戏设计还引入了语音合成技术，使用了飞桨（PaddlePaddle）深度学习框架下语音方向的开源模型库 paddlespeech ，进行了声音分类、语音合成以及声音克隆的技术实现，并对不同网络模型采取搭建和训练。数据集采用了游戏里录制的 wav 和标注文本以及本地生成的 textgrid 对齐文件，在经过基于预训练模型上的300轮迭代训练后，通过文本生成近似于数据集音色的语音。代码开源在github.com/URLinkEVA/paperjour。
 
 关键字： 2d游戏   Cocos2d  Typescript  语音合成  深度学习
 
 # Abstract
 
-In recent years, the Internet has shown a rapid development trend and the development of the Internet has improved the development of various fields and boosted the social progress. The Internet has penetrated 
-Based on the analysis of the research at home and abroad, this paper introduces the design significance, design emphasis and design status of 2D map exploring lightweight games. Through the development of Typescript language learning game engine cocos-related knowledge, and combined with Tiledmap to make lightweight game rendering map. The game is also designed to incorporate speech synthesis technology, using paddlespeech, an open source model library for speech directions under the paddle deep learning framework, this paper introduces the implementation of voice classification, Voice wake-up, voiceprint recognition, voice recognition, voice translation, voice synthesis and voice cloning. It works well with the finetune training, which uses the voice data set of a particular character. Code is available at github.com/URLinkEVA/paperjour.
+According to the《China Game Industry Report 2022》 officially released at the recent annual meeting of China's game industry, the actual sales revenue of China's game market in 2022 was 265.884 billion yuan, down 10.33% year-on-year. The number of game users was 664 million, down 0.33% year-on-year. After the obvious slowdown in the growth rate in 2021, the scale declined for the first time in the past eight years, indicating that the industry has entered the era of the stock market. In the context of an existing market and changing age groups of users, it is critical to develop innovative games that meet the needs of young people. The high demand of young users for game quality has accelerated the game industry into an era of competition and the rise of creative content games. The current game needs to achieve a short update cycle of the version of the promotion of strong, you can quickly understand the version content through a simple and easy to use lightweight game.
+
+Based on the analysis of research at home and abroad, this paper introduces the design significance, design focus and design status of 2D map exploration lightweight games. Learn knowledge related to game engine Cocos and Canvas rendering technology through Typescript language development, and make lightweight game rendering maps combined with Tiledmap. Speech synthesis technology was also introduced into the game design. paddlespeech, an open source model library for speech direction under the PaddlePaddle deep learning framework, was used to realize sound classification, speech synthesis and sound cloning technologies, and different network models were constructed and trained. The datasets uses the wav and annotated text recorded in the game and the locally-generated textgrid alignment file. After 300 rounds of iterative training based on the pre-training model, the text generates the voice that approximates the timbour of the dataset. Code is available at github.com/URLinkEVA/paperjour.
 
 # 第一章 绪论
 
 ## 1.1 课题研究背景与选题意义
 
-当前游戏h5活动短周期大需求，根据一个简单易上手的活动快速了解针对版本内容前瞻，仅供娱乐
+休闲娱乐已经成为了现代人生活中不可或缺的一部分，尤其是在工作和学习压力大、生活节奏快的今天。因此，选择一款画面音质好、品质优良的轻量级游戏已经成为了一种流行的休闲方式。据统计，全球在线游戏市场规模已经超过了1000亿美元，并且每年还在以10%以上的速度增长，这表明人们对休闲娱乐的需求越来越高，对高品质休闲互动游戏的需求也越来越大。休闲类游戏是覆盖年龄段最广的游戏类型之一，例如俄罗斯方块、五子棋、推箱子等经典游戏，它们曾经给不少玩家们带来美好的回忆。这些游戏不仅具有简单易上手的特点，而且还能够让玩家们在游戏中体验到挑战和成就感，因此开发出大家都喜欢的高品质休闲互动游戏能够受到人们的普遍欢迎。这样的游戏应该具备以下特点：首先游戏的画面要精美音效要逼真，能够给玩家带来身临其境的感觉；其次游戏的玩法要简单易懂但是又不失挑战性，能够让玩家们在游戏中得到成就感；最后游戏的品质要优良，不会出现卡顿闪退等问题，保证玩家们的游戏体验。
 
-当前游戏角色声音存在不稳定性，无法满足游戏行业需求
+好的游戏不仅能够带给玩家们欢乐和放松，还能够激发他们的创造力和想象力。通过游戏，人们可以结交新朋友，拓展社交圈子；还可以通过游戏学习新知识，提高自己的技能水平。因此，开发高品质休闲互动游戏不仅仅是为了满足人们的娱乐需求，更是为了推动整个游戏产业的发展和社会的进步。
 
-随着人们生活质量的不断提高以及网络的普及， 人们的业余生活质量要求也在不断提升，选择一款好玩精美，画面音质好，品质优良的休闲游戏已经成为一种流行的休闲方式。可以说在人们的日常生活中，除了工作、学习，玩自己喜欢的游戏正在成为一种时尚。而且休闲类游戏大概是覆盖年龄段最广的一类，俄罗斯方块、五子棋、推箱子非常经典，休闲类游戏曾经给了不少玩家们一个美好的回忆，也是目前游戏平台非常广的一类游戏。所以， 开发出大家都比较喜欢的高品质的休闲互动游戏，将会受到人们的普遍欢迎。让人们在工作学习之余，享受游戏的快乐，也是一款游戏真正成功的意义。
+根据极光发布的《2021年中国手机游戏行业研究报告》数据显示，年轻一代（25岁及以下）用户占手机游戏玩家的半数以上，成为核心用户群。这些年轻用户对游戏品质有较高要求。在以年轻人为主的TapTap平台，《TapTap2021年度报告》显示，2021年二次元、模拟、休闲、Roguelike、射击、科幻、独立游戏以及像素风等类型的游戏更受欢迎。产品端游戏出现马太效应，用户更倾向于选择头部的精品内容。从灼识咨询的数据显示来看，受二次元文化影响的年轻人群中，核心二次元用户（持续大量消费二次元内容、广泛参与相关活动和向他人传播相关内容）占比达30%，泛二次元用户（对二次元文化有一定了解并有消费行为）占比高达95%。这助推了中国二次元文化产业，如游戏、动漫等的发展。从移动网民每日App使用时长来看，2022年第二季度，短视频行业用户时长占比为32%，虽然回落至去年第三季度水平，但依然排名首位。手机游戏行业用户时长占比仅为5%，短视频使用时长是手游的6.4倍。除短视频外，手游使用时长还低于即时通讯、在线视频和综合新闻等其他移动应用。因此，移动游戏面临着来自其他移动App的激烈竞争，游戏爆款的重要性日益凸显。
+
+当前，游戏行业已经进入到精品化、多元化、全球化、年轻化的新时代。在政策方面，版号总量受到严格控制，审核趋于严格，企业在游戏的立项、研发、运营和发行等方面都受到影响。这迫使游戏企业不断提高游戏品质和出海能力，但同时也增加了游戏研发投入门槛和风险。国内外大厂加码叠加买量成本攀升，这使得海外市场的竞争日益加剧。在产品方面，目前行业强调爆款逻辑，马太效应加剧，头部产品形成较强的壁垒，格局稳定。上半年缺少有竞争力的爆款新品，大部分新游产品表现不佳的原因是从立项开始就缺乏能够满足用户多元需求的产品框架和较高的产品制作规格。此外用户年龄层更迭，呈现年轻化趋势，时间、金钱和精力都有限，对游戏品质和时间碎片化有更高的要求。游戏也面临着其他娱乐产品竞争抢夺用户时长，如短视频。中国游戏行业用户年龄层更迭，年轻用户对产品品类和品质提出了新要求，存在市场存量产品与年轻用户需求不匹配的情况。此外，内容型游戏和年轻向品类正在崛起。在立项端，参照多年前的模板来开发游戏难以吸引当下的核心玩家。由于版号严格控制，游戏研发周期拉长，需要游戏厂商在立项端做到足够超前，否则将面临未来游戏产品上线时产品竞争力下降的风险。长期来看，国内外游戏市场都强调产品力，粗放式买量增长路径难以持续。因此，国内游戏厂商需要将更多精力放在打磨产品和提升自身工业化研发实力上，能够做出符合主流用户群体需求的产品力将在未来的竞争中至关重要。
+
+2022年9月，米哈游旗下律政恋爱推理手游产品《未定事件簿》项目组发布公告，称由于莫奕配音演员暂时无法参与语音收录的工作，为避免后续游戏内莫奕相关语音资源的缺失，经过项目组慎重评估，将基于AI技术制作莫奕的语音。首批语音资源在2022年9月6日开启的“百味盈欢”活动中正式上线。莫弈是一名著名的心理医生，行为举止从容优雅，性格成熟稳重，因此该角色的声音更多主打温柔成熟的风格。逆熵AI合成的音色偏向沉稳的男声，与莫弈人设相契合，逆熵AI还会根据文本语境对声音做出相应改变。虽然AI配音不如真人配音真实，但能够增强代入感，使玩家更好地融入游戏世界。与米哈游推出的虚拟偶像鹿鸣相似，逆熵AI合成的声音自然且有提升的空间。
+
+从商业角度看，AI配音与真人配音相比具有成本低、效率高的优势。真人配音的不确定性通常会导致耗时、准确度不够等问题，而AI则可以有效地降低人力成本，同时提高配音效率。相对于真人配音的繁琐流程，AI配音可以通过对目标声音的未排序数据进行训练，快速生成流畅标准的音频，避免了人工配音时可能会出现的发音错误等问题，从而提高了配音的质量和效率。另一方面，从作品适配性的角度看，AI也具有非常重要的优势。AI的声音通常是对数据的重复学习组成，如果有足够多的采集样本，便可以随意变换音色，结合不同的场景配出不同的声音。这使得AI配音能够拓展自身对于作品的适配度，使得作品的呈现更加多样化和灵活性。相比之下，真人配音的音色和表现力相对固定，难以随意变换，因此在适配多种作品时存在一定的局限性。AI配音的这种灵活性和多样性，可以让作品的配音更加符合不同的场景和需求，从而提高作品的品质和竞争力。
+
+近期在绘画界出现了AI画画，利用人工智能技术进行绘画创作。通过训练模型来学习和模仿艺术家的绘画风格，从而生成类似于艺术家绘画的图像。AI画画可以应用于许多领域，如数字艺术、电影特效、游戏开发等，为这些领域带来了更多的创作灵感和可能性。技术的发展不仅能够提高艺术作品的创作效率和质量，还可以让更多人参与到艺术创作中来，推动艺术和科技的融合发展。就游戏行业而言，AI在重新定义游戏研发的整个过程，并在持续影响关联领域。与此同时，不少相关就业冒出更多不同形式的游戏岗位需求出现。AI技术在带给游戏行业新一轮的变革，能够有效的降低游戏开发的成本，给更多的中小厂商带来新的机会，未来的游戏领域将不再是“巨头公司的天下”。通过AI，大型游戏，尤其是画面精美的3A游戏的成本会下降到小型工作室可承受的水平。
+
+游戏结合AI的行业已经逐渐成为游戏行业的一个热点领域，涉及的技术和应用也越来越广泛。而现在游戏更新周期短急需生产力，通过AI辅助能节约时间成本，本文在通过基于Cocos游戏引擎下进行轻量级游戏的设计，并通过基于深度学习进行人物语音合成，两者互相结合进行了AI与游戏共同发展的可能性，通过这样的尝试能够达到提升游戏的趣味性与互动性，让玩家有着更好的体验。
+
+
 
 ## 1.2 课题研究现状
 
-版本宣发，语音合成技术
-
-截至2021年，有80%的App将全部或部分基于HTML5。这意味着大部分App的内容都将是以网页的形式呈现，典型的例子包括微信、Facebook、Twitter等。谷歌浏览器于9月1日起不再自动播放Flash。亚马逊宣布旗下网络的所有广告将不再使用Flash。在可预见的未来，Flash广告将被HTML5广告所替代。各大主流社交平台对H5分享的支持都是比较友好的，企业对H5的需求一直在增加，定制化H5的价格也是很高。
-
-​		H5作品的最根本目的就是向用户传递信息。比起普通的PPT和视频，H5因为其特效众多，场景切换方便，所以更加适合故事的讲述。一个优秀的故事性H5页面，通常能够极大引起用户的共鸣，达到意想不到的效果。
-
-​		H5作品与传统作品最明显的区别之一就是H5作品中拥有众多的互动功能。通过这些互动功能，用户可以深度参与到H5作品中，更为贴切地感受到您想要传达的信息，同时也会给用户留下更深的印象。参与感比较强的作品中最具有代表性的就是各类H5小游戏。
-
-​		H5作品中拥有大量的活动插件，例如投票、表单等功能。通过这些插件，H5能达到其他宣传途径遥不可及的宣传效果。尤其是在游戏类H5日益频繁的今天，更能引起用户的注意。
-
-
+AI已经被广泛应用于各类行业，例如医疗保健行业的医学诊断、药物研发、疾病预测和健康管理等方面，通过分析大量的医学图像和数据，帮助医生更准确地诊断疾病和提供更好的治疗方案。在金融行业中上分析大量的金融数据和市场信息，帮助金融机构更准确地评估风险和提高投资收益。在制造业中分析生产数据和质量数据，优化生产流程和提高产品质量，提高企业的效率和竞争力。在零售业中分析客户数据和市场趋势，优化营销策略和提高客户满意度，提高企业的销售额和盈利能力。在教育行业中分析学生的学习数据和行为，为学生提供更加个性化的学习方案和教学评估，提高学生的学习效果和学习兴趣。下面本文简单介绍一下AI语音技术国内外研究现状。
 
 ### 1.2.1 国外研究现状
 
-深度学习、sovit4
+语音合成技术是一种将文字或其他非语音信号转换为语音信号的技术。它可以将文本、符号、数字等信息转换为声音，并输出成语音信号，使得计算机可以通过语音的方式与人类进行交互。语音合成技术的应用也非常广泛，包括自动问答系统、手机语音助手、智能家居、语音交互机器人、车载语音导航等等。在这些应用中，语音合成技术可以将计算机生成的文本或其他非语音信号转换为自然语音，从而实现人机交互。国外语音合成技术的发展主要表现基于深度学习、生成对抗网络（GAN）、数据驱动语音合成技术以及基于语音合成和自然语言处理的交互式语音系统这几个方面：
+
+通过使用深度神经网络模型，可以训练出更加自然、流畅的语音合成系统。例如Google的WaveNet模型采用了深度学习技术来实现更加逼真的语音合成。
+
+基于生成对抗网络（GAN）的语音合成技术：生成对抗网络是一种新兴的深度学习技术，可以用于训练生成模型。在语音合成领域，GAN技术可以生成更加自然、真实的语音。例如，基于GAN的语音合成模型Tacotron 2和MelGAN，均在语音质量和自然度方面有了很大的提升。
+
+基于数据驱动的语音合成技术：数据驱动的语音合成技术是一种基于大量语音数据来训练模型的方法。这种方法可以提高语音合成系统的准确性和自然度。例如，Mozilla的OpenTTS和百度的DeepSpeech，均采用了数据驱动的语音合成技术。
+
+基于语音合成和自然语言处理的交互式语音系统：近年来，语音合成技术和自然语言处理技术的结合，使得交互式语音系统得到了很大的发展。例如，Amazon的Alexa和Google的Google Assistant，这些系统可以通过语音交互来实现智能家居控制、语音搜索等功能，为用户提供更加智能化、便捷的体验。
+
+
 
 ### 1.2.2 国内研究现状
 
 paddlespeech
+
+基于深度学习的语音合成技术：国内的语音合成研究也开始采用深度学习技术，例如搜狗公司的AI语音合成技术，也采用了基于深度学习的WaveNet模型，实现了更加自然的语音合成效果。
+
+基于混合自回归模型的语音合成技术：近年来，国内的一些研究机构和企业也开始研究基于混合自回归模型的语音合成技术，例如科大讯飞公司的HIS模型和阿里巴巴的Hifi-GAN模型，这些模型可以生成更具表现力和自然度的语音。
+
+基于语音合成和情感识别的研究：国内的一些研究机构和企业也开始研究基于语音合成和情感识别的技术，例如华为公司的Emotion TTS技术，可以根据不同的情感状态生成不同的语音，为人机交互提供更加丰富的体验。
+
+基于语音合成和深度强化学习的研究：国内的一些研究机构和企业也开始研究基于语音合成和深度强化学习的技术，例如百度的Deep Voice 3模型，也采用了基于深度强化学习的方法来进一步提高语音合成效果。
 
 ## 1.3论文主要内容和结构安排
 
@@ -257,7 +278,7 @@ plt.show()
 
 平稳信号是指其统计特性不随时间变化的信号。对于一个长度为N的平稳信号x(t)，如果它的均值和方差在整个时间段内保持不变，那么就称它为平稳信号。与之相反，如果均值和方差在不同时间段内发生变化，那么就称它为非平稳信号。平稳信号和非平稳信号的主要区别在于它们的统计特性，由于平稳信号的统计特性不随时间变化，因此它们可以用相同的数学模型来描述和分析。而非平稳信号的统计特性随时间变化，所以它们需要不同的数学模型来描述和分析。在实际应用中，许多信号都不是完全平稳的，例如心电图、语音信号等。对于这些非平稳信号，我们需要采用特殊的方法来进行分析和处理，例如差分方程、自回归模型等。
 
-通常傅里叶变换只适合处理平稳信号，由于非平稳信号频率特性会随时间变化，为了捕获这一时变特性，需要对信号进行时频分析，包括短时傅里叶变换、小波变换、希尔伯特变换、希尔伯特黄变换这几种变换方法。
+通常傅里叶变换只适合处理平稳信号，由于非平稳信号频率特性会随时间变化，为了捕获这一时变特性，需要对信号进行时频分析，例如本文采用的短时傅里叶变换方法。
 
 例如一个连续信号的傅里叶变换和它的反变换
 $$
@@ -401,13 +422,17 @@ plt.show()
 
 # 第三章 地图的设计与实现
 
+canvas和
+
+人物预设体
+
 ## 3.1 Tiledmap
 
 要制作一个合格的 2D 地图探索游戏，需要一个完整的游戏地图场景来作为载体。在 2D 游戏中，要制作游戏地图特别是涉及多个关卡地图，业界通常都是使用 Tiledmap 瓦片地图来实现， 因为其操作简单，效率很高，支持的软件完善可以随时迁移，很多游戏都采用它来设计地图，例如小时候耳熟能详的平面游戏超级玛利亚、坦克大战、魂斗罗等等。
 
 瓦片地图，简单地说就是一个个瓦片堆积起来的一个地图。如果有 iOS 游戏开发经验并熟悉 SpriteKit 的话，对 TileMap 会非常了解， Xcode 对瓦片地图的支持非常完善，功能很强大也易于上手，缺点是 Xcode 只支持 Mac OS 或者 iOS 系统。另外在 Unity 2018 版本之前，使用 Unity制作 2D 游戏的地图也是很不方便的，如果想在 Android 或者 Window/Linux 等其他操作系统上开发游戏，那么需要使用其他的第三方软件来辅助制作地图了。
 
-一个游戏场景就是一个简单的世界，我们可以为这个世界添加很多有趣的元素，让玩家有兴趣去探索，这里使用瓦片地图来制作游戏场景，实际上，它是由很多小瓦片组成，这些小瓦片称之为Tile 。瓦片可以很简单，也可以非常复杂，但是在同一个游戏世界里其大小都是统一的，瓦片的类型主要有三种类型： 90° 直角俯视地图（ Orthogonal/Square ）、45° 等距斜视地图（ Isometric ）、等六边形地图（ Hexagonal ）。这三种类型在 Godot 中都是支持的，本文直接采用第一种。
+一个游戏场景就是一个简单的世界，通过素材可以为这个世界添加很多有趣的元素，让玩家有兴趣去探索，这里使用瓦片地图来制作游戏场景，实际上，它是由很多小瓦片组成，这些小瓦片称之为Tile 。瓦片可以很简单，也可以非常复杂，但是在同一个游戏世界里其大小都是统一的，瓦片的类型主要有三种类型： 90° 直角俯视地图（ Orthogonal/Square ）、45° 等距斜视地图（ Isometric ）、等六边形地图（ Hexagonal ）。这三种类型在 Tiledmap 中都是支持的，本文直接采用第一种。
 
 ## 3.2 三层
 
@@ -419,15 +444,13 @@ plt.show()
 
 ## 4.2 场景切换
 
-## 4.3 playerControl
+## 4.3 人物状态控制
 
-## 4.4 talkControl
+## 4.4 文本存储
 
-### 4.4.1 文本存储
+## 4.5 音效播放
 
-### 4.4.2 音效播放
-
-# 第五章 深度学习语音技术研究
+# 第五章 深度学习语音研究
 
 ## 5.1 语音合成
 
