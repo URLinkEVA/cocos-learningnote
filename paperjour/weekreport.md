@@ -37,4 +37,29 @@
 
 接触unity引擎
 
-# 第八周
+# 第八周往后
+进行地图场景搭建
+
+进行人物移动控制相关代码编写
+
+合成人物唇形并实践FastSpeech2
+
+完善场景代码，进行文本对话功能添加
+
+实践语音合成技术达到更好效果
+
+进行论文初稿大纲设计
+
+进行短时傅里叶演示内容详解
+
+进行logfbank的计算方法并用paddleaudio.features.LogMelSpectrogram演示提取
+
+数据集采用ESC-50，选取PANNs中的预训练模型cnn14作为 backbone，用于提取声音的深层特征，SoundClassifer创建下游的分类网络，实现对输入音频的分类实践。
+
+进行论文章节撰写
+
+毕设成品完善功能代码编写
+
+阅读相关论文补充毕设论文
+
+精读论文Algorithm for Optimized mRNA Design Improves Stability and Immunogenicity，结合知识点展开，对论文表述进行优化
